@@ -1,11 +1,11 @@
-use std::vec;
 use std::fs::read_to_string;
+use std::vec;
 
 #[derive(Clone)]
 struct Range(i128, i128);
 
-pub fn run()  {
-  let input = read_to_string("./input.txt").unwrap();
+pub fn run() {
+    let input = read_to_string("./input.txt").unwrap();
     let lines: Vec<_> = input.split("\n\n").collect();
     let seeds_ranges: Vec<Range> = lines
         .first()
@@ -55,10 +55,7 @@ pub fn run()  {
             let mut curr = range.clone();
             for x in section.iter() {
                 let offset = x[0] - x[1];
-                if curr.0 <= curr.1
-                    && curr.0 < x[1] + x[2]
-                    && x[1] <= curr.1
-                {
+                if curr.0 <= curr.1 && curr.0 < x[1] + x[2] && x[1] <= curr.1 {
                     if curr.0 < x[1] {
                         new_ranges.push(Range(curr.0, x[1] - 1));
                         curr.0 = x[1];
@@ -66,20 +63,14 @@ pub fn run()  {
                             new_ranges.push(Range(curr.0 + offset, curr.1 + offset));
                             curr.0 = curr.1 + 1;
                         } else {
-                            new_ranges.push(Range(
-                                curr.0 + offset,
-                                x[1] + x[2] - 1 + offset,
-                            ));
+                            new_ranges.push(Range(curr.0 + offset, x[1] + x[2] - 1 + offset));
                             curr.0 = x[1] + x[2];
                         }
                     } else if curr.1 < x[1] + x[2] {
                         new_ranges.push(Range(curr.0 + offset, curr.1 + offset));
                         curr.0 = curr.1 + 1;
                     } else {
-                        new_ranges.push(Range(
-                            curr.0 + offset,
-                            x[1] + x[2] - 1 + offset,
-                        ));
+                        new_ranges.push(Range(curr.0 + offset, x[1] + x[2] - 1 + offset));
                         curr.0 = x[1] + x[2];
                     }
                 }
@@ -98,5 +89,5 @@ pub fn run()  {
 }
 
 fn main() {
-  run();
+    run();
 }
