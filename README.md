@@ -1,3 +1,4 @@
 # advent-of-code
 
-## 2023
+a compilation of my attempts at AOC
+
